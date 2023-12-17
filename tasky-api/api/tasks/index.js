@@ -20,14 +20,15 @@ router.get('/:id', (req, res) => {
 
 //Add a task
 router.post('/', (req, res) => {
+    console.log(req.body);
     const { title, description, deadline, priority, done } = req.body;
     const newTask = {
         id: uuidv4(),
-        title: "Complete Assignment 1",
-        description: "Finish Assignment 1 for WAD2",
-        deadline: "Tomorrow",
-        priority: "Medium",
-        done: "False"
+        title,
+        description,
+        deadline,
+        priority,
+        done
     };
     tasksData.tasks.push(newTask);
     res.status(201).json(newTask);
