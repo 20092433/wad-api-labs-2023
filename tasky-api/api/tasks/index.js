@@ -1,4 +1,5 @@
 import express from 'express';
+import { v4 as uuidv4 } from 'uuid';
 import { tasksData } from './tasksData';
 
 const router = express.Router(); 
@@ -15,6 +16,22 @@ router.get('/:id', (req, res) => {
         return res.status(404).json({ status: 404, message: 'Task not found' });
     }
     return res.status(200).json(task);
+});
+
+//Add a task
+router.post('/', (req, res) => {
+    const { title, description, deadline, priority, done } = req.body;
+    const newTask = {
+        id: uuidv4(),
+        title: "Complete Assignment 1",
+        description: "Finish Assignment 1 for WAD2",
+        deadline: "Tomorrow",
+        priority: "Medium",
+        done: "False"
+    };
+    tasksData.tasks.push(newTask);
+    res.status(201).json(newTask);
+    tasksData.total_results++;
 });
 
 export default router;
